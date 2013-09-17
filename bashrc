@@ -161,7 +161,8 @@ if [ $UID -eq "0" ]; then
   PS1="\[\033[1;31m\][\D{%a:%d}|\$(date +%H:%M)][\w]#\[\033[0m\] "
 fi
 
-alias top-commands='history | awk "{print $2}" | awk "BEGIN {FS="|"} {print $1}" |sort|uniq -c | sort -rn | head -10'
+#alias top-commands='history | awk "{print $2}" | awk "BEGIN {FS="|"} {print $1}" |sort|uniq -c | sort -rn | head -10'
+# this ^ doesnt work for some reason, look into it
 alias ff='sudo find / -name $1'
 alias install='sudo apt-get install'
 alias cred='cat Documents/credentials.txt'
