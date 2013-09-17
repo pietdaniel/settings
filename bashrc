@@ -104,10 +104,25 @@ fi
 
 WIDTH=$(tput cols)
 
+#lynx 2>&1 >/dev/null 
+#LYNX_IS_AVAILABLE=$?
+
+
 # im suspicious of tput?!?!?
 if [ $WIDTH -eq "0" ]; then
   WIDTH=80
 fi
+
+function myip() # get IP adresses this could use some work
+{
+#  MY_IP=$(/sbin/ifconfig eth0 | awk "/inet/ { print $2 } " | sed -e s/addr://)
+#  MY_ISP=$(/sbin/ifconfig eth0 | awk "/P-t-P/ { print $3 } " | sed -e s/P-t-P://)
+#  myip=`elinks -dump http://checkip.dyndns.org:8245/`
+#  if [ $LYNX_IS_AVAILABLE -eq 0] ; then
+    lynx -dump -hiddenlinks=ignore -nolist "http://checkip.dyndns.org:8245/" | grep "Current IP Address" | cut -d":" -f2 | cut -d" " -f2 
+#  fi
+}
+
 
 function welcome() { # cute welcome msg
 if [ $UID -eq "0" ]; then
@@ -116,16 +131,14 @@ else
   figlet -w ${WIDTH} -c -f fraktur "Welcome Daniel" #| toilet -f term -filter gay -w 160 // could not load font ilter (?!??!)
   date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
   /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
+  uname -smr | figlet -f term -c -w ${WIDTH}
+  myip | figlet -f term -c -w ${WIDTH}
 fi
 }
 welcome
 
-#function myip() # get IP adresses this could use some work
-#{
-#  MY_IP=$(/sbin/ifconfig eth0 | awk "/inet/ { print $2 } " | sed -e s/addr://)
-#  MY_ISP=$(/sbin/ifconfig eth0 | awk "/P-t-P/ { print $3 } " | sed -e s/P-t-P://)
-#  myip=`elinks -dump http://checkip.dyndns.org:8245/`
-#}
+
+
 
 extract () {
   if [ -f $1 ] ; then
@@ -161,8 +174,7 @@ if [ $UID -eq "0" ]; then
   PS1="\[\033[1;31m\][\D{%a:%d}|\$(date +%H:%M)][\w]#\[\033[0m\] "
 fi
 
-#alias top-commands='history | awk "{print $2}" | awk "BEGIN {FS="|"} {print $1}" |sort|uniq -c | sort -rn | head -10'
-# this ^ doesnt work for some reason, look into it
+alias top-commands='history | awk "{print $2}" | awk "BEGIN {FS="|"} {print $1}" |sort|uniq -c | sort -rn | head -10'
 alias ff='sudo find / -name $1'
 alias install='sudo apt-get install'
 alias cred='cat Documents/credentials.txt'
