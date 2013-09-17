@@ -98,16 +98,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # ~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~ #
-#                         custom stuff here                         #
+# 101                     custom stuff here                         #
 # ~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~_~ #
 
 
 WIDTH=$(tput cols)
-
-#lynx 2>&1 >/dev/null 
-#LYNX_IS_AVAILABLE=$?
-
-
 # im suspicious of tput?!?!?
 if [ $WIDTH -eq "0" ]; then
   WIDTH=80
@@ -118,21 +113,40 @@ function myip() # get IP adresses this could use some work
 #  MY_IP=$(/sbin/ifconfig eth0 | awk "/inet/ { print $2 } " | sed -e s/addr://)
 #  MY_ISP=$(/sbin/ifconfig eth0 | awk "/P-t-P/ { print $3 } " | sed -e s/P-t-P://)
 #  myip=`elinks -dump http://checkip.dyndns.org:8245/`
-#  if [ $LYNX_IS_AVAILABLE -eq 0] ; then
+if which lynx >/dev/null; then
     lynx -dump -hiddenlinks=ignore -nolist "http://checkip.dyndns.org:8245/" | grep "Current IP Address" | cut -d":" -f2 | cut -d" " -f2 
-#  fi
+  else
+    echo "127.0.0.1"
+fi
 }
 
+if which figlet >/dev/null; then
+    FIGLET=1
+  else
+    FIGLET=0
+fi
 
 function welcome() { # cute welcome msg
 if [ $UID -eq "0" ]; then
- figlet -w ${WIDTH} -f gothic -c root 
+  if [ $FIGLET -eq "1" ]; then
+      figlet -w ${WIDTH} -f gothic -c root 
+    else
+      echo "root"
+  fi
 else
-  figlet -w ${WIDTH} -c -f fraktur "Welcome Daniel" #| toilet -f term -filter gay -w 160 // could not load font ilter (?!??!)
-  date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
-  /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
-  uname -smr | figlet -f term -c -w ${WIDTH}
-  myip | figlet -f term -c -w ${WIDTH}
+  if [ $FIGLET -eq "1" ]; then
+    figlet -w ${WIDTH} -c -f fraktur "Welcome Daniel" #| toilet -f term -filter gay -w 160 // could not load font ilter (?!??!)
+    date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
+    /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
+    uname -smr | figlet -f term -c -w ${WIDTH}
+    myip | figlet -f term -c -w ${WIDTH}
+  else
+    echo "Welcome Daniel"
+    date
+    uname -smr
+    myip
+    cal
+  fi
 fi
 }
 welcome
