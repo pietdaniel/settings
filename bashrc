@@ -139,6 +139,7 @@ else
     date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
     /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
     uname -smr | figlet -f term -c -w ${WIDTH}
+    ~/.window_remap.sh #should really check for this
     #myip | figlet -f term -c -w ${WIDTH}
   else
     echo "Welcome Daniel"
