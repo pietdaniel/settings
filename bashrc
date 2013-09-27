@@ -139,13 +139,14 @@ else
     date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
     /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
     uname -smr | figlet -f term -c -w ${WIDTH}
-    myip | figlet -f term -c -w ${WIDTH}
+    #myip | figlet -f term -c -w ${WIDTH}
   else
     echo "Welcome Daniel"
     date
     uname -smr
-    myip
-    cal
+    #myip
+    cal -3
+    cat ~/.notes.txt
   fi
 fi
 }
@@ -201,7 +202,7 @@ alias gb='git branch '
 alias push='git push origin '
 alias commit='git commit -m '
 alias st='git status'
-alias add='git add *'
+alias add='git add'
 alias pull='git pull origin'
 alias school='ssh pietdan@login.ccs.neu.edu'
 alias q='clear'
