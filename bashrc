@@ -120,14 +120,31 @@ if which lynx >/dev/null; then
 fi
 }
 
+#checks for applications
 if which figlet >/dev/null; then
     FIGLET=1
   else
     FIGLET=0
 fi
 
-function welcome() { # cute welcome msg
+if which toilet >/dev/null; then
+    TOILET=1
+  else
+    TOILET=0
+fi
+
+if [ -f ~/.window_remap.sh ]; then
+    REMAP=1
+else
+    REMAP=0 
+fi
+
+
+function welcome() { # cute welcome msg also more stuff these days
 if [ $UID -eq "0" ]; then
+  alias rm = "rm -i"
+  alias cp = "cp -i"
+  alias mv = "mv -i"
   if [ $FIGLET -eq "1" ]; then
       figlet -w ${WIDTH} -f gothic -c root 
     else
@@ -136,10 +153,17 @@ if [ $UID -eq "0" ]; then
 else
   if [ $FIGLET -eq "1" ]; then
     figlet -w ${WIDTH} -c -f fraktur "Welcome Daniel" #| toilet -f term -filter gay -w 160 // could not load font ilter (?!??!)
-    date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
-    /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
+    if [ $TOILET -eq "1" ]; then
+      date | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH} --gay
+      /usr/games/fortune | figlet -f term -c -w ${WIDTH} | toilet -f term -w ${WIDTH}
+    else 
+      date | figlet -f term -c -w ${WIDTH}
+      /usr/games/fortune | figlet -f term -c -w ${WIDTH} 
+    fi
     uname -smr | figlet -f term -c -w ${WIDTH}
-    ~/.window_remap.sh #should really check for this
+    if [ $REMAP -eq "1" ]; then
+      ~/.window_remap.sh #should really check for this
+    fi
     #myip | figlet -f term -c -w ${WIDTH}
   else
     echo "Welcome Daniel"
@@ -152,9 +176,6 @@ else
 fi
 }
 welcome
-
-
-
 
 extract () {
   if [ -f $1 ] ; then
@@ -181,8 +202,6 @@ extract () {
 mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
 mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
-
-
 
 PS1="\[\033[1;32m\][\D{%a:%d}|\$(date +%H:%M)][\w]$\[\033[0m\] "
 
