@@ -227,3 +227,5 @@ alias pull='git pull origin'
 alias school='ssh pietdan@login.ccs.neu.edu'
 alias q='clear'
 alias tether='/home/civil/DroidTetherSV/droidtethersv'
+alias nginx_relad='/etc/init.d/nginx reload'
+
