@@ -123,7 +123,7 @@ fi
 #checks for applications
 if which figlet >/dev/null; then
     FIGLET=1
-  else
+else
     FIGLET=0
 fi
 
@@ -138,6 +138,13 @@ if [ -f ~/.window_remap.sh ]; then
 else
     REMAP=0 
 fi
+
+if which sl >/dev/null; then
+  SL=1
+else 
+  SL=0
+fi 
+
 
 
 function welcome() { # cute welcome msg also more stuff these days
@@ -227,5 +234,14 @@ alias pull='git pull origin'
 alias school='ssh pietdan@login.ccs.neu.edu'
 alias q='clear'
 alias tether='/home/civil/DroidTetherSV/droidtethersv'
-alias nginx_relad='/etc/init.d/nginx reload'
+if [ -f /etc/init.d/nginx ]; then
+  alias nginx_relad='/etc/init.d/nginx reload'
+fi
+alias ..='cd ../'
+alias ....='cd ../../'
+alias ......='cd ../../../'
+if [ $SL -eq "0" ]; then 
+  alias sl='sl -e'
+fi
+alias newreg='ssh pietdan@129.10.113.117'
 
