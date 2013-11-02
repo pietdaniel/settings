@@ -48,6 +48,7 @@ hi Visual guibg=#404040
 "hi Cursor guifg=NONE guibg=#586068
 hi Cursor guibg=#b0d0f0
 
+highlight LineNr ctermfg=darkgrey
 
 exe 'hi Normal         guifg='.s:white             .' guibg='.s:darkgrey
 exe 'hi Underlined     guifg='.s:white             .' guibg='.s:darkgrey        .' gui=underline'
