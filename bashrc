@@ -149,9 +149,9 @@ fi
 
 function welcome() { # cute welcome msg also more stuff these days
 if [ $UID -eq "0" ]; then
-  alias rm = "rm -i"
-  alias cp = "cp -i"
-  alias mv = "mv -i"
+  alias rm="rm -i"
+  alias cp="cp -i"
+  alias mv="mv -i"
   if [ $FIGLET -eq "1" ]; then
       figlet -w ${WIDTH} -f gothic -c root 
     else
