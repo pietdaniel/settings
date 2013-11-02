@@ -17,20 +17,23 @@ fi
 
 if [ $UID -eq "0" ]; then
     echo "root"
+    if [ $FIGLET -eq "0" ]; then
+      apt-get install -y figlet
+    fi
+    if [ $TOILET -eq "0" ]; then
+      apt-get install -y toilet
+    fi
   else
     echo "no-root"
-    cp ./vimrc ~/.vimrc
 fi
 
-# if not install figlet toilet
+if [ $FIGLET -eq "1" ]; then
+  cp -i ./*.flf /usr/share/figlet/
+fi
 
-# if installed move fonts
+cp -i ./vimrc ~/.vimrc
+cp -iR ./vim ~/.vim
+cp -i ./bashrc ~/.bashrc
+cp -i /notes ~/.notes.txt
 
-# move vimrc
-
-# move vim files
-
-# move bashrc
-
-# update notes
 echo 'done'
