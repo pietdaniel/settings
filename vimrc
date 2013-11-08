@@ -3,7 +3,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set number
-colorscheme noctu 
+colorscheme twilight
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif

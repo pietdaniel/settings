@@ -32,7 +32,7 @@ if [ $FIGLET -eq "1" ]; then
 fi
 
 cp -i ./vimrc ~/.vimrc
-cp -iR ./vim ~/.vim
+mv -i ./vim ~/.vim
 cp -i ./bashrc ~/.bashrc
 cp -i /notes ~/.notes.txt
 

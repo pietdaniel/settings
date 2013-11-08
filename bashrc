@@ -245,3 +245,4 @@ if [ $SL -eq "0" ]; then
 fi
 alias newreg='ssh pietdan@129.10.113.117'
 
+alias ccat='pygmentize -g'
