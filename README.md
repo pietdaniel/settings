@@ -5,6 +5,10 @@ TODO: pimp out vim
       better internet checks
       shell scripts to check root and install programs
 
+version 0.1.0 <br>
+Haven't updated this in a while going to
+do a bit of work for this
+
 version 0.0.5 <br>
 checks for window remap
 alias for root rm cp mv
