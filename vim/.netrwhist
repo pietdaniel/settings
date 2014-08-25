@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/civil/.m2'
+let g:netrw_dirhist_2='/home/civil/Downloads'
+let g:netrw_dirhist_3='/home/civil/.vim'
+let g:netrw_dirhist_4='/home/civil/.vim/colors'
+let g:netrw_dirhist_5='/home/civil/workspace'
+let g:netrw_dirhist_6='/home/civil/workspace/twb'
+let g:netrw_dirhist_7='/home/civil/workspace/twb/twb/src/main/resources'
+let g:netrw_dirhist_8='/home/civil/.litecoin'
